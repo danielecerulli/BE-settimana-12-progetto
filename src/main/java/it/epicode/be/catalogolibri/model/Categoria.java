@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.Data;
 
 @Data
@@ -26,6 +29,7 @@ public class Categoria {
 	@JoinTable(name = "categria_libro",
 	joinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "id"),
 	inverseJoinColumns = @JoinColumn(name = "libro_id", referencedColumnName = "id"))
+	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	private List<Libro> libri = new ArrayList<>();
 
 }
