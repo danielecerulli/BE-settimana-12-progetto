@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import it.epicode.be.catalogolibri.model.Libro;
 import it.epicode.be.catalogolibri.service.LibroService;
@@ -32,6 +33,7 @@ public class LibroController {
 	@GetMapping(path = "/libri")
 	//Se più di un ruolo deve poter accedere all'endpoint
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')") // Se un SOLO ruolo : @PreAuthorize("hasRole('ROLE_USER')")
+	@Operation(description = "Lista di TUTTI i Libri presenti nel DB")
 	public ResponseEntity<List<Libro>> findAll() {
 		List<Libro> findAll = libroService.findAll(); // <--------------------AAA
 
@@ -45,6 +47,7 @@ public class LibroController {
 
 	@GetMapping(path = "/libro/{id}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+	@Operation(description = "Ricerca Libro per id")
 	public ResponseEntity<Libro> findById(@PathVariable(required = true) Integer id) {
 		Optional<Libro> find = libroService.findById(id);
 
@@ -58,6 +61,7 @@ public class LibroController {
 
 	@PostMapping(path = "/libro")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(description = "Inserimento Libro")
 	public ResponseEntity<Libro> save(@RequestBody Libro libro) {
 		Libro save = libroService.save(libro);
 		return new ResponseEntity<>(save, HttpStatus.OK);
@@ -66,6 +70,7 @@ public class LibroController {
 
 	@PutMapping(path = "/libro/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(description = "Update Libro per id Libro")
 	public ResponseEntity<Libro> update(@PathVariable Integer id, @RequestBody Libro libro) {
 		Libro save = libroService.update(id, libro);
 		return new ResponseEntity<>(save, HttpStatus.OK);
@@ -74,9 +79,38 @@ public class LibroController {
 
 	@DeleteMapping(path = "/libro/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(description = "Delete Libro per id del Libro")
 	public ResponseEntity<String> delete(@PathVariable Integer id) {
 		libroService.delete(id);
 		return new ResponseEntity<>("Libro deleted", HttpStatus.OK);
+
+	}
+	
+	@GetMapping(path = "/libro/cat/{categoria}")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+	@Operation(description = "Ricerca Libri per categoria")
+	public ResponseEntity<List<Libro>> findByCategorieNomeCategoria(@PathVariable(required = true) String categoria) {
+		List<Libro> findCat = libroService.findByCategorie(categoria);
+
+		if (findCat != null) { 
+			return new ResponseEntity<>(findCat, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+
+	}
+	
+	@GetMapping(path = "/libro/aut/{cognome}")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+	@Operation(description = "Ricerca Libri per autore")
+	public ResponseEntity<List<Libro>> findByAutoriCognome(@PathVariable(required = true) String cognome) {
+		List<Libro> findAut = libroService.findByAutori(cognome);
+
+		if (findAut != null) { 
+			return new ResponseEntity<>(findAut, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
 
 	}
 

@@ -53,5 +53,13 @@ public class LibroService {
 	public void delete(Integer id) {
 		libroRepo.deleteById(id);
 	}
+	
+	public List<Libro> findByCategorie(String categoria) {
+		return libroRepo.findByCategorieNomeCategoria(categoria);
+	}
+	
+	public List<Libro> findByAutori(String cognome) {
+		return libroRepo.findByAutoriCognome(cognome);
+	}
 
 }

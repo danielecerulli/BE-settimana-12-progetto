@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import it.epicode.be.catalogolibri.model.Autore;
 import it.epicode.be.catalogolibri.service.AutoreService;
@@ -30,6 +31,7 @@ public class AutoreController {
 	
 	@GetMapping(path = "/autori")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')") // Se un SOLO ruolo : @PreAuthorize("hasRole('ROLE_USER')")
+	@Operation(description = "Lista di TUTTI gli Autori presenti nel DB")
 	public ResponseEntity<List<Autore>> findAll() {
 		List<Autore> findAll = autoreService.findAll();
 
@@ -43,6 +45,7 @@ public class AutoreController {
 
 	@GetMapping(path = "/autore/{id}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+	@Operation(description = "Ricerca Autore per id Autore")
 	public ResponseEntity<Autore> findById(@PathVariable(required = true) Integer id) {
 		Optional<Autore> find = autoreService.findById(id);
 
@@ -56,6 +59,7 @@ public class AutoreController {
 
 	@PostMapping(path = "/autore")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(description = "Inserimento Autore")
 	public ResponseEntity<Autore> save(@RequestBody Autore autore) {
 		Autore save = autoreService.save(autore);
 		return new ResponseEntity<>(save, HttpStatus.OK);
@@ -64,6 +68,7 @@ public class AutoreController {
 
 	@PutMapping(path = "/autore/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(description = "Update Autore per id Autore")
 	public ResponseEntity<Autore> update(@PathVariable Integer id, @RequestBody Autore autore) {
 		Autore save = autoreService.update(id, autore);
 		return new ResponseEntity<>(save, HttpStatus.OK);
@@ -72,6 +77,7 @@ public class AutoreController {
 
 	@DeleteMapping(path = "/autore/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(description = "Delete Autore per id Autore")
 	public ResponseEntity<String> delete(@PathVariable Integer id) {
 		autoreService.delete(id);
 		return new ResponseEntity<>("Autore deleted", HttpStatus.OK);

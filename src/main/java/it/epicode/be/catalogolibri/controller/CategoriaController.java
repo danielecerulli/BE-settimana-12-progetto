@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import it.epicode.be.catalogolibri.model.Categoria;
 import it.epicode.be.catalogolibri.service.CategoriaService;
@@ -33,6 +34,7 @@ public class CategoriaController {
 	@GetMapping(path = "/categorie")
 	//Se più di un ruolo deve poter accedere all'endpoint
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')") // Se un SOLO ruolo : @PreAuthorize("hasRole('ROLE_USER')")
+	@Operation(description = "Lista di TUTTE le Categorie presenti nel DB")
 	public ResponseEntity<List<Categoria>> findAll() {
 		List<Categoria> findAll = categoriaService.findAll();
 
@@ -46,6 +48,7 @@ public class CategoriaController {
 
 	@GetMapping(path = "/categoria/{id}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+	@Operation(description = "Ricerca Categoria per id Categoria")
 	public ResponseEntity<Categoria> findById(@PathVariable(required = true) Integer id) {
 		Optional<Categoria> find = categoriaService.findById(id);
 
@@ -59,6 +62,7 @@ public class CategoriaController {
 
 	@PostMapping(path = "/categoria")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(description = "Inserimento Categoria")
 	public ResponseEntity<Categoria> save(@RequestBody Categoria categoria) {
 		Categoria save = categoriaService.save(categoria);
 		return new ResponseEntity<>(save, HttpStatus.OK);
@@ -67,6 +71,7 @@ public class CategoriaController {
 
 	@PutMapping(path = "/categoria/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(description = "Update Categoria per id Categoria")
 	public ResponseEntity<Categoria> update(@PathVariable Integer id, @RequestBody Categoria categoria) {
 		Categoria save = categoriaService.update(id, categoria);
 		return new ResponseEntity<>(save, HttpStatus.OK);
@@ -75,6 +80,7 @@ public class CategoriaController {
 
 	@DeleteMapping(path = "/categoria/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(description = "Delete Categoria per id Categoria")
 	public ResponseEntity<String> delete(@PathVariable Integer id) {
 		categoriaService.delete(id);
 		return new ResponseEntity<>("Autore deleted", HttpStatus.OK);

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import it.epicode.be.catalogolibri.security.exceptions.CatalogoException;
 import it.epicode.be.catalogolibri.security.model.LoginRequest;
 import it.epicode.be.catalogolibri.security.model.LoginResponse;
@@ -53,6 +54,7 @@ public class AuthController {
 	JwtUtils jwtUtils;
 
 	@PostMapping("/login")
+	@Operation(description = "Login Utente")
 	public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
 
 		Authentication authentication = authenticationManager.authenticate(
@@ -72,6 +74,7 @@ public class AuthController {
 	}
 
 	@PostMapping("/signup")
+	@Operation(description = "Registrazione NUOVO Utente")
 	public ResponseEntity<?> registerUser(@RequestBody RequestRegisterUser registerUser) {
 
 		if (userRepository.existsByEmail(registerUser.getEmail())) {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import it.epicode.be.catalogolibri.security.model.Utente;
 import it.epicode.be.catalogolibri.security.service.UtenteService;
@@ -31,6 +32,7 @@ public class UtenteController {
 
 	@GetMapping(path = "/utenti")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+	@Operation(description = "Lista di TUTTI gli Utenti presenti nel DB")
 	public ResponseEntity<List<Utente>> findAll() {
 		List<Utente> findAll = utenteService.findAll();
 
@@ -44,6 +46,7 @@ public class UtenteController {
 
 	@GetMapping(path = "/utente/{id}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+	@Operation(description = "Ricerca Utente per id Utente")
 	public ResponseEntity<Utente> findById(@PathVariable(required = true) Integer id) {
 		Optional<Utente> find = utenteService.findById(id);
 
@@ -57,6 +60,7 @@ public class UtenteController {
 
 	@PostMapping(path = "/utente")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(description = "Inserimento Utente (operazione consentita SOLO all'Admin)")
 	public ResponseEntity<Utente> save(@RequestBody Utente utente) {
 		Utente save = utenteService.save(utente);
 		return new ResponseEntity<>(save, HttpStatus.OK);
@@ -65,6 +69,7 @@ public class UtenteController {
 
 	@PutMapping(path = "/utente/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(description = "Update Utente per id Utente (operazione consentita SOLO all'Admin)")
 	public ResponseEntity<Utente> update(@PathVariable Integer id, @RequestBody Utente utente) {
 		Utente save = utenteService.update(id, utente);
 		return new ResponseEntity<>(save, HttpStatus.OK);
@@ -73,6 +78,7 @@ public class UtenteController {
 
 	@DeleteMapping(path = "/utente/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(description = "Delete Utente per id Utente (operazione consentita SOLO all'Admin)")
 	public ResponseEntity<String> delete(@PathVariable Integer id) {
 		utenteService.delete(id);
 		return new ResponseEntity<>("Utente deleted", HttpStatus.OK);
