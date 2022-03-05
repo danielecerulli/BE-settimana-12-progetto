@@ -42,6 +42,7 @@ public class LibroService {
 			libroUpdate.setAutori(libro.getAutori());
 			libroUpdate.setAnno(libro.getAnno());
 			libroUpdate.setCategorie(libro.getCategorie());
+			libroUpdate.setAutori(libro.getAutori());
 			libroRepo.save(libroUpdate);
 			return libroUpdate;
 		} else {
