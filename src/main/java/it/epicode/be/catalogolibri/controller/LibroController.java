@@ -113,5 +113,14 @@ public class LibroController {
 		}
 
 	}
+	
+	/*
+	 * prevedere tracciati di esempio SOLO con lista ID Autore e Categoria
+	 * nel Service ciclare su queste collections e per ogni autoreId fare il
+	 * findByAutoreId
+	 * per ogni Autore trovato aggiungerlo ad una collection
+	 * fare il set della collection sul Libro
+	 * 
+	 */
 
 }

@@ -35,7 +35,7 @@ public class Libro {
 	private List<Autore> autori = new ArrayList<>();
 	
 	@ManyToMany
-	@JoinTable(name = "libro_categoria",
+	@JoinTable(name = "libro_categoria", 
 	joinColumns = @JoinColumn(name = "libro_id", referencedColumnName = "id"),
 	inverseJoinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "id"))
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
