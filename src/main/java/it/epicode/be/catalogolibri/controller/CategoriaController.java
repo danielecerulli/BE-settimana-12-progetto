@@ -83,7 +83,7 @@ public class CategoriaController {
 	@Operation(description = "Delete Categoria per id Categoria")
 	public ResponseEntity<String> delete(@PathVariable Integer id) {
 		categoriaService.delete(id);
-		return new ResponseEntity<>("Autore deleted", HttpStatus.OK);
+		return new ResponseEntity<>("Categoria deleted", HttpStatus.OK);
 
 	}
 

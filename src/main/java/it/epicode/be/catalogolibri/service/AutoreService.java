@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.epicode.be.catalogolibri.model.Autore;
+import it.epicode.be.catalogolibri.model.Libro;
 import it.epicode.be.catalogolibri.repository.AutoreRepository;
+import it.epicode.be.catalogolibri.repository.LibroRepository;
 import it.epicode.be.catalogolibri.security.exceptions.CatalogoException;
 
 @Service
@@ -15,6 +17,9 @@ public class AutoreService {
 	
 	@Autowired
 	private AutoreRepository autoreRepo;
+	
+	@Autowired
+	private LibroRepository libroRepo;
 	
 	public Optional<Autore> findById( Integer id) {
 		return autoreRepo.findById(id);
@@ -49,6 +54,12 @@ public class AutoreService {
 	}
 	
 	public void delete(Integer id) {
+		Autore a = autoreRepo.findById(id).get();
+		List<Libro> listaLibriCat = libroRepo.findByAutoriCognome(a.getCognome());
+		for (Libro l : listaLibriCat ) {
+			l.getAutori().remove(a);
+			libroRepo.save(l);
+		}
 		autoreRepo.deleteById(id);
 	}
 

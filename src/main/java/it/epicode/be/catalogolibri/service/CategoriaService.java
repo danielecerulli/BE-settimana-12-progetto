@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.epicode.be.catalogolibri.model.Categoria;
+import it.epicode.be.catalogolibri.model.Libro;
 import it.epicode.be.catalogolibri.repository.CategoriaRepository;
+import it.epicode.be.catalogolibri.repository.LibroRepository;
 import it.epicode.be.catalogolibri.security.exceptions.CatalogoException;
 
 @Service
@@ -15,6 +17,9 @@ public class CategoriaService {
 	
 	@Autowired
 	private CategoriaRepository categoriaRepo;
+	
+	@Autowired
+	private LibroRepository libroRepo;
 	
 	public Optional<Categoria> findById( Integer id) {
 		return categoriaRepo.findById(id);
@@ -48,6 +53,12 @@ public class CategoriaService {
 	}
 	
 	public void delete(Integer id) {
+		Categoria c = categoriaRepo.findById(id).get();
+		List<Libro> listaLibriCat = libroRepo.findByCategorieNomeCategoria(c.getNomeCategoria());
+		for (Libro l : listaLibriCat ) {
+			l.getCategorie().remove(c);
+			libroRepo.save(l);
+		}
 		categoriaRepo.deleteById(id);
 	}
 
