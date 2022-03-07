@@ -45,20 +45,21 @@ mentre l'endpoint http://localhost:8080/auth/login oppure http://localhost:8080/
 Traccia di esempio inserimento Libro:
    
     {
-    
-     "titolo": "string",
-     "anno": 0,
-     "prezzo": 0,
+     "id": 17,
+     "titolo": "Il pendolo di Foucault",
+     "anno": 1988,
+     "prezzo": 9.90,
      "autori": [
       {
-      "nome": "string",
-      "cognome": "string"
+      "id": 9,
+      "nome": "Umberto",
+      "cognome": "Eco"
       }
      ],
     "categorie": [
     {
-      
-      "nomeCategoria": "string"
+      "id": 5,
+      "nomeCategoria": "Giallo"
       
           }
        ]
