@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -26,9 +28,9 @@ public class Libro {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	//@JsonProperty("id")
 	private Integer id;	
-	private @NotNull String titolo;
-	private @NotNull Integer anno;
-	private @NotNull Double prezzo;
+	private @NotBlank(message = "Inserire il titolo dl libro!") String titolo;
+	private @NotBlank(message = "Inserire l'anno!") Integer anno;
+	private @NotBlank(message = "Inserire il prezzo!") Double prezzo;
 	
 	@ManyToMany
 	@JoinTable(name = "libro_autore",

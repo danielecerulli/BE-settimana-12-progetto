@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -26,8 +28,8 @@ public class Autore {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	//@JsonProperty("id")
 	private Integer id;
-	private @NotNull String nome;
-	private @NotNull String cognome;
+	private @NotBlank(message = "Inserire il nome dell'autore!") String nome;
+	private @NotBlank(message = "Inserire il cognome dell'autore!") String cognome;
 	
 	/*@ManyToMany
 	@JoinTable(name = "autore_libro",

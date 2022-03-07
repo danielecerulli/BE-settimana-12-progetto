@@ -3,10 +3,13 @@ package it.epicode.be.catalogolibri.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,7 +63,7 @@ public class AutoreController {
 	@PostMapping(path = "/autore")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Operation(description = "Inserimento Autore")
-	public ResponseEntity<Autore> save(@RequestBody Autore autore) {
+	public ResponseEntity<Autore> save(@Valid @RequestBody Autore autore, BindingResult result) {
 		Autore save = autoreService.save(autore);
 		return new ResponseEntity<>(save, HttpStatus.OK);
 
@@ -69,7 +72,7 @@ public class AutoreController {
 	@PutMapping(path = "/autore/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Operation(description = "Update Autore per id Autore")
-	public ResponseEntity<Autore> update(@PathVariable Integer id, @RequestBody Autore autore) {
+	public ResponseEntity<Autore> update(@PathVariable Integer id,@Valid @RequestBody Autore autore, BindingResult result) {
 		Autore save = autoreService.update(id, autore);
 		return new ResponseEntity<>(save, HttpStatus.OK);
 
