@@ -28,9 +28,9 @@ public class Libro {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	//@JsonProperty("id")
 	private Integer id;	
-	private @NotBlank(message = "Inserire il titolo dl libro!") String titolo;
-	private @NotBlank(message = "Inserire l'anno!") Integer anno;
-	private @NotBlank(message = "Inserire il prezzo!") Double prezzo;
+	private @NotBlank(message = "Inserire il titolo del libro!") String titolo;
+	private @NotNull(message = "Inserire l'anno del libro!") Integer anno;
+	private @NotNull(message = "Inserire il prezzo del libro!") Double prezzo;
 	
 	@ManyToMany
 	@JoinTable(name = "libro_autore",
