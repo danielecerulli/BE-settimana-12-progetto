@@ -46,6 +46,13 @@ class CatalogoLibriApplicationTests2 {
 		this.mockMvc.perform(delete("/api/autore/1"))
 			.andExpect(status().isForbidden());
 	}
+	
+	@Test
+	@WithMockUser(username = "admin", password = "admin", roles = "ADMIN")
+	public void deleteAutoreByAdmin() throws Exception {
+		this.mockMvc.perform(delete("/api/autore/1"))
+			.andExpect(status().isOk());
+	}
 
 
 }
