@@ -43,7 +43,7 @@ public class CategoriaService {
 		if (categoriaResult.isPresent()) {
 			Categoria categoriaUpdate = categoriaResult.get();
 			categoriaUpdate.setNomeCategoria(categoria.getNomeCategoria());
-			categoriaUpdate.setLibri(categoria.getLibri());	
+			//categoriaUpdate.setLibri(categoria.getLibri());	
 			categoriaRepo.save(categoriaUpdate);
 			return categoriaUpdate;
 		} else {

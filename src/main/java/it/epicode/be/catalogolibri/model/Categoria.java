@@ -25,11 +25,11 @@ public class Categoria {
 	private Integer id;
 	private String nomeCategoria;
 	
-	@ManyToMany
+	/*@ManyToMany
 	@JoinTable(name = "categoria_libro",
 	joinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "id"),
 	inverseJoinColumns = @JoinColumn(name = "libro_id", referencedColumnName = "id"))
 	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-	private List<Libro> libri = new ArrayList<>();
+	private List<Libro> libri = new ArrayList<>();*/
 
 }

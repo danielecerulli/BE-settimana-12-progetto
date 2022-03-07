@@ -44,7 +44,7 @@ public class AutoreService {
 			Autore autoreUpdate = autoreResult.get();
 			autoreUpdate.setNome(autore.getNome());
 			autoreUpdate.setCognome(autore.getCognome());
-			autoreUpdate.setLibri(autore.getLibri());
+			//autoreUpdate.setLibri(autore.getLibri());
 			autoreRepo.save(autoreUpdate);
 			return autoreUpdate;
 		} else {
