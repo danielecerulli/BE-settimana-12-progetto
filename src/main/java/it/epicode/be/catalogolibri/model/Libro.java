@@ -23,7 +23,7 @@ public class Libro {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@JsonProperty("id")
+	//@JsonProperty("id")
 	private Integer id;
 	private String titolo;
 	private Integer anno;
@@ -33,14 +33,14 @@ public class Libro {
 	@JoinTable(name = "libro_autore",
 	joinColumns = @JoinColumn(name = "libro_id", referencedColumnName = "id"),
 	inverseJoinColumns = @JoinColumn(name = "autore_id", referencedColumnName = "id"))
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	private List<Autore> autori = new ArrayList<>();
 	
 	@ManyToMany
 	@JoinTable(name = "libro_categoria", 
 	joinColumns = @JoinColumn(name = "libro_id", referencedColumnName = "id"),
 	inverseJoinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "id"))
-	@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+	//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 	private List<Categoria> categorie = new ArrayList<>();
 
 }

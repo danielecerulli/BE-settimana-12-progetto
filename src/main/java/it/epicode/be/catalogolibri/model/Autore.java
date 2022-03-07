@@ -23,7 +23,7 @@ public class Autore {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@JsonProperty("id")
+	//@JsonProperty("id")
 	private Integer id;
 	private String nome;
 	private String cognome;

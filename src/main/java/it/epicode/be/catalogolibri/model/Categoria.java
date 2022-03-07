@@ -23,7 +23,7 @@ public class Categoria {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@JsonProperty("id")
+	//@JsonProperty("id")
 	private Integer id;
 	private String nomeCategoria;
 	
