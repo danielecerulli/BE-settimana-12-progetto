@@ -35,7 +35,7 @@ public class LibroController {
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')") // Se un SOLO ruolo : @PreAuthorize("hasRole('ROLE_USER')")
 	@Operation(description = "Lista di TUTTI i Libri presenti nel DB")
 	public ResponseEntity<List<Libro>> findAll() {
-		List<Libro> findAll = libroService.findAll(); // <--------------------AAA
+		List<Libro> findAll = libroService.findAll(); 
 
 		if (findAll != null) {
 			return new ResponseEntity<>(findAll, HttpStatus.OK);

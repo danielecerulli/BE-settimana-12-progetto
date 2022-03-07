@@ -20,7 +20,7 @@ import lombok.Data;
 public class Utente {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String userName;
 	private String password;
