@@ -21,12 +21,12 @@ import lombok.Data;
 public class Autore {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String cognome;
 	
-	@ManyToMany(mappedBy = "libro")
+	@ManyToMany
 	@JoinTable(name = "autore_libro",
 	joinColumns = @JoinColumn(name = "autore_id", referencedColumnName = "id"),
 	inverseJoinColumns = @JoinColumn(name = "libro_id", referencedColumnName = "id"))
