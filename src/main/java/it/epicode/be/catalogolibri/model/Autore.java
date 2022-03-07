@@ -26,7 +26,7 @@ public class Autore {
 	private String nome;
 	private String cognome;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "libro")
 	@JoinTable(name = "autore_libro",
 	joinColumns = @JoinColumn(name = "autore_id", referencedColumnName = "id"),
 	inverseJoinColumns = @JoinColumn(name = "libro_id", referencedColumnName = "id"))

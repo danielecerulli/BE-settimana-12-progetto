@@ -25,7 +25,7 @@ public class Categoria {
 	private Integer id;
 	private String nomeCategoria;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "libro")
 	@JoinTable(name = "categria_libro",
 	joinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "id"),
 	inverseJoinColumns = @JoinColumn(name = "libro_id", referencedColumnName = "id"))
